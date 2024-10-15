@@ -1,12 +1,13 @@
 import express from "express";
 const app = express();
+app.use(express.json());
 const users = [];
 app.post('/usuarios', (req, res) => {
-    console.log(req);
-    res.send('Ok post. Aqui deu certo');
+    users.push(req.body);
+    res.status(201).json(req.body);
 });
 app.get('/usuarios', (req, res) => {
-    res.send('Ok, deu bom');
+    res.status(200).json(users);
 });
 
 app.listen(3000)
