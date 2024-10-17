@@ -20,8 +20,8 @@ app.get('/usuarios', async (req, res) => {
 });
 app.put('/usuarios/:id', async (req, res) => {
     await prisma.user.update({
-        where:{
-            id:req.params.id
+        where: {
+            id: req.params.id
         },
         data: {
             email: req.body.email,
@@ -30,6 +30,14 @@ app.put('/usuarios/:id', async (req, res) => {
         }
     })
     res.status(201).json(req.body);
+});
+app.delete('/usuarios/:id', async (req, res) => {
+    await prisma.user.delete({
+        where: {
+            id: req.params.id,
+        }
+    });
+    res.status(200).json({ message: ' usuario deletado com Sucesso!' })
 });
 
 app.listen(3000)
